@@ -1,0 +1,126 @@
+<!--
+
+<div class="container">
+
+    <form (submit)="cadastrar($event)" class="row"> &lt;!&ndash;() indica fluxo da view para a fonte de dados - event binding&ndash;&gt;
+    <div class="col-md-6">
+            <div class="form-group">
+                <label>Título</label>
+                <input [value]="foto.titulo" class="form-control"  autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label>URL</label>
+                <input [value]="foto.url" class="form-control"  autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea [value]="foto.descricao" class="form-control"  autocomplete="off">
+                </textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Salvar
+            </button>
+            <a [routerLink]="['']" class="btn btn-primary">Voltar</a>
+            <hr>
+        </div>
+    </form>
+</div>
+-->
+<!--
+
+<div class="container">
+
+    <form (submit)="cadastrar($event)" class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label>Título</label>
+                <input
+                        (input)="foto.titulo = $event.target.value"
+                        [value]="foto.titulo"
+                        class="form-control"  autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label>URL</label>
+                <input
+                        (input)="foto.url = $event.target.value"
+                        [value]="foto.url"
+                        class="form-control"  autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea>
+                    (input)="foto.descricao = $event.target.value"
+                    [value]="foto.descricao"
+                    class="form-control"  autocomplete="off">
+                </textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Salvar
+            </button>
+            <a [routerLink]="['']" class="btn btn-primary">Voltar</a>
+            <hr>
+        </div>
+    </form>
+</div>-->
+
+
+
+
+<!-- alurapic/client/app/cadastro/components/cadastro.html -->
+
+<div class="container">
+
+    <form [formGroup]="meuForm" (submit)="cadastrar($event)" class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+
+                <label>Título</label>
+
+                <input
+                        name="titulo"
+                        [(ngModel)]="foto.titulo"
+                        formControlName="titulo"
+                        class="form-control" autocomplete="off">
+
+                <div *ngIf="!meuForm.controls.titulo.valid">
+
+                    <span *ngIf="meuForm.controls.titulo.errors.required" class="form-control alert-danger">
+                    Título obrigatório
+                    </span>
+
+                    <span *ngIf="meuForm.controls.titulo.errors.minlength" class="form-control alert-danger">
+                    Título deve ter no mínimo 4 caracteres
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label>URL</label>
+                <input name="url"  formControlName="url" [(ngModel)]="foto.url" class="form-control" autocomplete="off">
+                <span *ngIf="!meuForm.controls.url.valid" class="form-control alert-danger">
+                    URL obrigatória
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label>Descrição</label>
+                <textarea name="descricao" [(ngModel)]="foto.descricao" formControlName="descricao" class="form-control">
+                </textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="meuForm.invalid">Salvar</button>
+            <a [routerLink]="['']" class="btn btn-primary">Voltar</a>
+            <hr>
+        </div>
+        <!-- novidade aqui -->
+        <div class="col-md-6">
+            <foto url="{{foto.url}}" titulo="{{foto.titulo}}">
+            </foto>
+        </div>
+    </form>
+</div>
+
+
