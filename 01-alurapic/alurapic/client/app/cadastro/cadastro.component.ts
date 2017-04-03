@@ -1,5 +1,6 @@
 // alurapic/client/app/cadastro/cadastro.component.ts
 
+
 import { Component, Input } from '@angular/core';
 import { FotoComponent } from '../foto/foto.component';
 import { Http, Headers } from '@angular/http';
